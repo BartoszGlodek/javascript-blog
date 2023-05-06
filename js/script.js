@@ -2,12 +2,12 @@
 
 function titleClickHandler(event) {
     event.preventDefault();
-    const clickedElement = this
+    const clickedElement = this;
 
-    console.log('Link was clicked!');
+    console.log('Kliknięto link!');
     console.log(event);
 
-    //-----------------------------------------------------Remove class 'active' from all article links-----
+    //-----------------------------------------------------Usuń klasę 'active' ze wszystkich linków do artykułów-----
 
     const activeLinks = document.querySelectorAll('.titles a.active');
 
@@ -15,14 +15,12 @@ function titleClickHandler(event) {
         activeLink.classList.remove('active');
     }
 
-
-    //-----------------------------------------------------------Add class 'active' to the clicked link-----
+    //-----------------------------------------------------------Dodaj klasę 'active' do klikniętego linka-----
 
     this.classList.add('active');
     console.log('clickedElement:', clickedElement);
 
-
-    //----------------------------------------------------------Remove class 'active' from all articles-----
+    //----------------------------------------------------------Usuń klasę 'active' ze wszystkich artykułów-----
 
     const activeArticles = document.querySelectorAll('.posts .active');
 
@@ -30,36 +28,28 @@ function titleClickHandler(event) {
         activeArticle.classList.remove('active');
     }
 
-
-    //-------------------------------------------------------Get 'href' attribute from the clicked link-----
+    //-------------------------------------------------------Pobierz atrybut 'href' z klikniętego linka-----
 
     const articleSelector = this.getAttribute('href');
 
-
-    //--------------------------Find the correct article using the selector (value of 'href' attribute)-----
+    //--------------------------Znajdź właściwy artykuł, używając selektora (wartość atrybutu 'href')-----
 
     const targetArticle = document.querySelector(articleSelector);
 
-
-    //--------------------------------------------------------Add class 'active' to the correct article-----
+    //--------------------------------------------------------Dodaj klasę 'active' do właściwego artykułu-----
 
     targetArticle.classList.add('active');
 }
 
 
-const links = document.querySelectorAll('.titles a');
-
-for (let link of links) {
-    link.addEventListener('click', titleClickHandler);
-}
-
-
-//___LIST GENERATION FUNCTION_______________________________________________________________________________
+//___FUNKCJA GENERUJĄCA LISTĘ_______________________________________________________________________________
 
 const 
   optArticleSelector = '.post',
   optTitleSelector = '.post-title',
-  optTitleListSelector = '.titles';
+  optTitleListSelector = '.titles',
+  optArticleTags = '.post-tags',
+  optArticleAuthor= '.post-author';
 
 function generateTitleLinks(){
   
@@ -85,12 +75,13 @@ function generateTitleLinks(){
     
         /* get the article id */
     
-        const articleId = article.getAttribute('id');
+        let articleId = article.getAttribute('id');
 
-        /* ... */
+        /* zmienne tag i author należy dodać? */
 
+        let tag = document.querySelectorAll(optArticleTags);         
+        let author = document.querySelectorAll(optArticleAuthor);
     
-        
         /* find the title element */
     
         const articleTitle = article.querySelector(optTitleSelector);
@@ -124,3 +115,9 @@ function generateTitleLinks(){
 }
 
 generateTitleLinks();
+
+const links = document.querySelectorAll('.titles a');
+
+for (let link of links) {
+    link.addEventListener('click', titleClickHandler);
+}
