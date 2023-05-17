@@ -47,7 +47,7 @@ function titleClickHandler(event) {
 }
 
 
-//___LIST GENERATION FUNCTION_______________________________________________________________________________
+//  >>> LIST GENERATION FUNCTION <<< 
 
 
 const
@@ -57,12 +57,13 @@ const
 
 function generateTitleLinks() {
 
-    /* remove contents of titleList */
+    //---------------------------------------------------------------------Remove contents of titleList-----
 
     const titleList = document.querySelector(optTitleListSelector);
     titleList.innerHTML = '';
+    
 
-    /* find all the articles and save them to variable: articles */
+    //----------------------------------------Find all the articles and save them to variable: articles-----
 
     let articles = document.querySelectorAll(optArticleSelector);
 
@@ -96,13 +97,14 @@ function generateTitleLinks() {
 
 
     titleList.innerHTML = html;
+
+    const links = document.querySelectorAll('.titles a');
+    console.log(links);
+
+    for (let link of links) {
+    link.addEventListener('click', titleClickHandler);
+    }
 }
 
 generateTitleLinks();
 
-const links = document.querySelectorAll('.titles a');
-console.log(links);
-
-for (let link of links) {
-    link.addEventListener('click', titleClickHandler);
-}
